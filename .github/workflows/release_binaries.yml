@@ -36,7 +36,7 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: actions/create-release@v1.1.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -44,7 +44,7 @@ jobs:
           release_name: go2rtc ${{ github.event.inputs.go2rtc_version }} binaries
           body: For changelog look [here](https://github.com/AlexxIT/go2rtc/releases/tag/${{ github.event.inputs.go2rtc_version }}).
 
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -52,7 +52,7 @@ jobs:
           asset_path: bin/go2rtc_linux_amd64
           asset_name: go2rtc_linux_amd64.gz
           asset_content_type: application/octet-stream
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -61,7 +61,7 @@ jobs:
           asset_name: go2rtc_linux_amd64.LICENSE
           asset_content_type: text/plain
 
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -69,7 +69,7 @@ jobs:
           asset_path: bin/go2rtc_linux_arm64
           asset_name: go2rtc_linux_arm64.gz
           asset_content_type: application/octet-stream
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -78,7 +78,7 @@ jobs:
           asset_name: go2rtc_linux_arm64.LICENSE
           asset_content_type: text/plain
 
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -86,7 +86,7 @@ jobs:
           asset_path: bin/go2rtc_linux_arm
           asset_name: go2rtc_linux_arm.gz
           asset_content_type: application/octet-stream
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -95,7 +95,7 @@ jobs:
           asset_name: go2rtc_linux_arm.LICENSE
           asset_content_type: text/plain
 
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -103,7 +103,7 @@ jobs:
           asset_path: bin/go2rtc_linux_i386
           asset_name: go2rtc_linux_i386.gz
           asset_content_type: application/octet-stream
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -112,7 +112,7 @@ jobs:
           asset_name: go2rtc_linux_i386.LICENSE
           asset_content_type: text/plain
 
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -120,7 +120,7 @@ jobs:
           asset_path: bin/go2rtc_linux_i386
           asset_name: go2rtc_linux_i386.gz
           asset_content_type: application/octet-stream
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -129,7 +129,7 @@ jobs:
           asset_name: go2rtc_linux_i386.LICENSE
           asset_content_type: text/plain
 
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -137,7 +137,7 @@ jobs:
           asset_path: bin/go2rtc_linux_mipsel
           asset_name: go2rtc_linux_mipsel.gz
           asset_content_type: application/octet-stream
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -146,7 +146,7 @@ jobs:
           asset_name: go2rtc_linux_mipsel.LICENSE
           asset_content_type: text/plain
 
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -154,7 +154,7 @@ jobs:
           asset_path: bin/go2rtc_mac_amd64
           asset_name: go2rtc_mac_amd64.gz
           asset_content_type: application/octet-stream
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -163,7 +163,7 @@ jobs:
           asset_name: go2rtc_mac_amd64.LICENSE
           asset_content_type: text/plain
 
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -171,7 +171,7 @@ jobs:
           asset_path: bin/go2rtc_mac_arm64
           asset_name: go2rtc_mac_arm64.gz
           asset_content_type: application/octet-stream
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -180,7 +180,7 @@ jobs:
           asset_name: go2rtc_mac_arm64.LICENSE
           asset_content_type: text/plain
 
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -188,7 +188,7 @@ jobs:
           asset_path: bin/go2rtc_win_amd64.exe
           asset_name: go2rtc_win_amd64.exe.gz
           asset_content_type: application/octet-stream
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -197,7 +197,7 @@ jobs:
           asset_name: go2rtc_win_amd64.LICENSE
           asset_content_type: text/plain
 
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -205,7 +205,7 @@ jobs:
           asset_path: bin/go2rtc_win_arm64.exe
           asset_name: go2rtc_win_arm64.exe.gz
           asset_content_type: application/octet-stream
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -214,7 +214,7 @@ jobs:
           asset_name: go2rtc_win_arm64.LICENSE
           asset_content_type: text/plain
 
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -222,7 +222,7 @@ jobs:
           asset_path: bin/go2rtc_win_i386.exe
           asset_name: go2rtc_win_i386.exe.gz
           asset_content_type: application/octet-stream
-      - uses: actions/upload-release-asset@v1.0.1
+      - uses: actions/upload-release-asset@v1.1.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
