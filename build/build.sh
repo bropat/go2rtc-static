@@ -19,6 +19,7 @@ filenames[win_i386]="go2rtc_win32.zip"
 filenames[win_arm64]="go2rtc_win_arm64.zip"
 
 set -e
+cd $(dirname $0)
 mkdir -p ../bin
 
 for filename in "${!filenames[@]}"; do
