@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Download Binaries
-        run: sh ./build/build.sh ${{ github.event.inputs.go2rtc_version }}
+        run: bash ./build/build.sh ${{ github.event.inputs.go2rtc_version }}
 
       - name: Compress Binaries
         run: |
