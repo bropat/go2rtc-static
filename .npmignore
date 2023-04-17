@@ -6,6 +6,11 @@ img/
 gulpfile.js
 .devcontainer
 .github
+build/
+go2rtc.exe
+go2rtc.exe.LICENSE
+go2rtc
+go2rtc.LICENSE
 
 # CI test files
 test/
