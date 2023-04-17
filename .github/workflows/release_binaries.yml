@@ -40,7 +40,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: bin-${{ github.event.inputs.go2rtc_version }}
           release_name: go2rtc ${{ github.event.inputs.go2rtc_version }} binaries
           body: For changelog look [here](https://github.com/AlexxIT/go2rtc/releases/tag/${{ github.event.inputs.go2rtc_version }}).
 
