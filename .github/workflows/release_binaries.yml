@@ -1,0 +1,231 @@
+name: Release Binaries
+
+on:
+  workflow_dispatch:
+    inputs:
+      go2rtc_version:
+        description: Specify go2rtc version
+        required: true
+        default: v1.3.1
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download Binaries
+        run: sh ./build/build.sh ${{ github.event.inputs.go2rtc_version }}
+
+      - name: Compress Binaries
+        run: |
+          set -e
+          set -o pipefail
+          cat bin/go2rtc_linux_amd64 | gzip --best >bin/go2rtc_linux_amd64.gz
+          cat bin/go2rtc_linux_arm64 | gzip --best >bin/go2rtc_linux_arm64.gz
+          cat bin/go2rtc_linux_arm | gzip --best >bin/go2rtc_linux_arm.gz
+          cat bin/go2rtc_linux_i386 | gzip --best >bin/go2rtc_linux_i386.gz
+          cat bin/go2rtc_linux_mipsel | gzip --best >bin/go2rtc_linux_mipsel.gz
+          cat bin/go2rtc_mac_amd64 | gzip --best >bin/go2rtc_mac_amd64.gz
+          cat bin/go2rtc_mac_arm64 | gzip --best >bin/go2rtc_mac_arm64.gz
+          cat bin/go2rtc_win_amd64.exe | gzip --best >bin/go2rtc_win_amd64.exe.gz
+          cat bin/go2rtc_win_arm64.exe | gzip --best >bin/go2rtc_win_arm64.exe.gz
+          cat bin/go2rtc_win_i386.exe | gzip --best >bin/go2rtc_win_i386.exe.gz
+          ls -l bin
+        shell: bash
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_name: go2rtc ${{ github.event.inputs.go2rtc_version }} binaries
+          body: For changelog look [here](https://github.com/AlexxIT/go2rtc/releases/tag/${{ github.event.inputs.go2rtc_version }}).
+
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_linux_amd64
+          asset_name: go2rtc_linux_amd64.gz
+          asset_content_type: application/octet-stream
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_linux_amd64.LICENSE
+          asset_name: go2rtc_linux_amd64.LICENSE
+          asset_content_type: text/plain
+
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_linux_arm64
+          asset_name: go2rtc_linux_arm64.gz
+          asset_content_type: application/octet-stream
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_linux_arm64.LICENSE
+          asset_name: go2rtc_linux_arm64.LICENSE
+          asset_content_type: text/plain
+
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_linux_arm
+          asset_name: go2rtc_linux_arm.gz
+          asset_content_type: application/octet-stream
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_linux_arm.LICENSE
+          asset_name: go2rtc_linux_arm.LICENSE
+          asset_content_type: text/plain
+
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_linux_i386
+          asset_name: go2rtc_linux_i386.gz
+          asset_content_type: application/octet-stream
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_linux_i386.LICENSE
+          asset_name: go2rtc_linux_i386.LICENSE
+          asset_content_type: text/plain
+
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_linux_i386
+          asset_name: go2rtc_linux_i386.gz
+          asset_content_type: application/octet-stream
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_linux_i386.LICENSE
+          asset_name: go2rtc_linux_i386.LICENSE
+          asset_content_type: text/plain
+
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_linux_mipsel
+          asset_name: go2rtc_linux_mipsel.gz
+          asset_content_type: application/octet-stream
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_linux_mipsel.LICENSE
+          asset_name: go2rtc_linux_mipsel.LICENSE
+          asset_content_type: text/plain
+
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_mac_amd64
+          asset_name: go2rtc_mac_amd64.gz
+          asset_content_type: application/octet-stream
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_mac_amd64.LICENSE
+          asset_name: go2rtc_mac_amd64.LICENSE
+          asset_content_type: text/plain
+
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_mac_arm64
+          asset_name: go2rtc_mac_arm64.gz
+          asset_content_type: application/octet-stream
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_mac_arm64.LICENSE
+          asset_name: go2rtc_mac_arm64.LICENSE
+          asset_content_type: text/plain
+
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_win_amd64.exe
+          asset_name: go2rtc_win_amd64.exe.gz
+          asset_content_type: application/octet-stream
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_win_amd64.LICENSE
+          asset_name: go2rtc_win_amd64.LICENSE
+          asset_content_type: text/plain
+
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_win_arm64.exe
+          asset_name: go2rtc_win_arm64.exe.gz
+          asset_content_type: application/octet-stream
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_win_arm64.LICENSE
+          asset_name: go2rtc_win_arm64.LICENSE
+          asset_content_type: text/plain
+
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_win_i386.exe
+          asset_name: go2rtc_win_i386.exe.gz
+          asset_content_type: application/octet-stream
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: bin/go2rtc_win_i386.LICENSE
+          asset_name: go2rtc_win_i386.LICENSE
+          asset_content_type: text/plain
