@@ -3,9 +3,10 @@ import * as fs from "fs";
 import { pipeline } from "stream/promises";
 import got, { HTTPError } from "got";
 import { Progress } from "got";
-
+import { createGunzip } from "zlib";
 import { default as ProgressBar } from "progress";
 import { default as HttpsProxyAgent } from "https-proxy-agent";
+import { extname } from "path";
 
 var go2rtcPath = require(".");
 var pkg = require("../package.json");
@@ -55,6 +56,12 @@ if (proxyUrl) {
     agent = HttpsProxyAgent({hostname, port, protocol});
 }
 
+function isGzUrl(url: string): boolean {
+    const path = new URL(url).pathname.split("/");
+    const filename = path[path.length - 1];
+    return filename !== undefined && extname(filename) === ".gz";
+}
+
 async function downloadFile(url: string, destinationPath: string): Promise<void> {
     let progressBar: ProgressBar|null = null;
 
@@ -64,7 +71,6 @@ async function downloadFile(url: string, destinationPath: string): Promise<void>
                 https: agent
             },
             method: "GET",
-            decompress: true,
             isStream: true,
             followRedirect: true,
             maxRedirects: 3,
@@ -86,8 +92,8 @@ async function downloadFile(url: string, destinationPath: string): Promise<void>
             }
             progressBar.tick(progress.transferred);
         });
-
-        await pipeline(stream, fs.createWriteStream(destinationPath));
+        const streams = isGzUrl(url) ? [stream, createGunzip(), fs.createWriteStream(destinationPath)] : [stream, fs.createWriteStream(destinationPath)];
+        await pipeline(streams);
     } catch (error) {
         if (error instanceof HTTPError) {
             throw new Error(`${error.name}: ${error.message} - url: ${error.request.requestUrl}`);

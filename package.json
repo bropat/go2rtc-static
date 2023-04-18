@@ -1,6 +1,6 @@
 {
   "name": "go2rtc-static",
-  "version": "1.3.2",
+  "version": "1.3.2-1",
   "description": "go2rtc static binaries for Mac OSX, Linux and Windows",
   "main": "dist/index.js",
   "publishConfig": {
