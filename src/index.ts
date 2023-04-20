@@ -1,10 +1,12 @@
 import * as os from "os";
 import * as path from "path";
 
+let internalGo2rtcPath: string|null = null;
+
 if (process.env.GO2RTC_BIN) {
 
-    module.exports = process.env.GO2RTC_BIN;
-
+    internalGo2rtcPath = process.env.GO2RTC_BIN;
+    
 } else {
 
     const pkg = require("../package.json");
@@ -25,12 +27,14 @@ if (process.env.GO2RTC_BIN) {
   
     var platform = process.env.npm_config_platform || os.platform();
     var arch = process.env.npm_config_arch || os.arch();
-    var go2rtcPath: string|null = path.join(__dirname, executableBaseName + (platform === "win32" ? ".exe" : ""));
+    internalGo2rtcPath = path.join(__dirname, executableBaseName + (platform === "win32" ? ".exe" : ""));
   
     if (!binaries[platform] || binaries[platform].indexOf(arch) === -1) {
-        go2rtcPath = null;
+        internalGo2rtcPath= null;
     }
-  
-    module.exports = go2rtcPath
     
 }
+
+export const go2rtcPath: string|null = internalGo2rtcPath;
+export default go2rtcPath;
+module.exports = go2rtcPath;
