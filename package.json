@@ -1,6 +1,6 @@
 {
   "name": "go2rtc-static",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "go2rtc static binaries for Mac OSX, Linux and Windows",
   "main": "dist/index.js",
   "publishConfig": {
@@ -17,7 +17,7 @@
   "go2rtc-static": {
     "binary-release-tag-env-var": "GO2RTC_BINARY_RELEASE",
     "executable-base-name": "go2rtc",
-    "binary-release-tag": "bin-v1.4.0",
+    "binary-release-tag": "bin-v1.5.0",
     "binaries-url-env-var": "GO2RTC_BINARIES_URL"
   },
   "author": {
@@ -44,11 +44,11 @@
   },
   "dependencies": {
     "got": "^11.8.6",
-    "https-proxy-agent": "^5.0.1",
+    "https-proxy-agent": "^6.1.0",
     "progress": "^2.0.3"
   },
   "devDependencies": {
-    "@types/node": "^16.18.23",
+    "@types/node": "^16.18.25",
     "typescript": "^5.0.4",
     "@types/progress": "^2.0.5",
     "rimraf": "^3.0.2"
