@@ -5,7 +5,7 @@ import got, { HTTPError } from "got";
 import { Progress } from "got";
 import { createGunzip } from "zlib";
 import { default as ProgressBar } from "progress";
-import { default as HttpsProxyAgent } from "https-proxy-agent";
+import { HttpsProxyAgent } from "https-proxy-agent";
 import { extname } from "path";
 
 var go2rtcPath = require(".");
@@ -44,7 +44,7 @@ try {
         exitOnError(err);
 }
 
-let agent: HttpsProxyAgent.HttpsProxyAgent|undefined;
+let agent: HttpsProxyAgent<string>|undefined;
 const proxyUrl = (
     process.env.HTTPS_PROXY ||
     process.env.https_proxy ||
@@ -52,8 +52,7 @@ const proxyUrl = (
     process.env.http_proxy
 );
 if (proxyUrl) {
-    const { hostname, port, protocol } = new URL(proxyUrl);
-    agent = HttpsProxyAgent({hostname, port, protocol});
+    agent = new HttpsProxyAgent(new URL(proxyUrl));
 }
 
 function isGzUrl(url: string): boolean {
