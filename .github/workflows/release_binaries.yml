@@ -6,7 +6,7 @@ on:
       go2rtc_version:
         description: Specify go2rtc version
         required: true
-        default: v1.7.0
+        default: v1.7.1
 
 jobs:
   release:
