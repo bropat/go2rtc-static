@@ -1,6 +1,6 @@
 {
   "name": "go2rtc-static",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "go2rtc static binaries for Mac OSX, Linux and Windows",
   "main": "dist/index.js",
   "publishConfig": {
@@ -17,7 +17,7 @@
   "go2rtc-static": {
     "binary-release-tag-env-var": "GO2RTC_BINARY_RELEASE",
     "executable-base-name": "go2rtc",
-    "binary-release-tag": "bin-v1.9.0",
+    "binary-release-tag": "bin-v1.9.1",
     "binaries-url-env-var": "GO2RTC_BINARIES_URL"
   },
   "author": {
