@@ -1,8 +1,10 @@
 import * as os from "os";
 import * as fs from "fs";
 import { pipeline } from "stream/promises";
-import got, { HTTPError } from "got";
-import { Progress } from "got";
+import type { Got, HTTPError, Progress } from "got" with {
+    "resolution-mode": "import"
+};
+
 import { createGunzip } from "zlib";
 import { default as ProgressBar } from "progress";
 import { HttpsProxyAgent } from "https-proxy-agent";
@@ -65,6 +67,7 @@ async function downloadFile(url: string, destinationPath: string): Promise<void>
     let progressBar: ProgressBar|null = null;
 
     try {
+        const { default: got } = await import("got");
         const stream = await got.stream(url, {
             agent: {
                 https: agent
@@ -73,8 +76,12 @@ async function downloadFile(url: string, destinationPath: string): Promise<void>
             isStream: true,
             followRedirect: true,
             maxRedirects: 3,
-            timeout: 30 * 1000, // 30s
-            retry: 3,
+            timeout:  {
+                request: 30 * 1000, // 30s
+            },
+            retry: {
+                limit: 3
+            },
             responseType: "buffer"
         });
 
@@ -94,7 +101,7 @@ async function downloadFile(url: string, destinationPath: string): Promise<void>
         const streams = isGzUrl(url) ? [stream, createGunzip(), fs.createWriteStream(destinationPath)] : [stream, fs.createWriteStream(destinationPath)];
         await pipeline(streams);
     } catch (error) {
-        if (error instanceof HTTPError) {
+        if (error instanceof (await import("got")).HTTPError) {
             throw new Error(`${error.name}: ${error.message} - url: ${error.request.requestUrl}`);
         }
         throw error;
